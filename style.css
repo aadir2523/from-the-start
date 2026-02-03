@@ -47,3 +47,29 @@ body::before {
     radial-gradient(circle at bottom right, rgba(255, 77, 109, 0.2), transparent 40%);
   z-index: -1;
 }
+.center {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+button {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(255, 77, 109, 0.4);
+}
+
+.hidden {
+  display: none;
+}
