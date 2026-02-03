@@ -38,3 +38,12 @@ ul {
 li {
   margin: 0.7rem 0;
 }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 143, 171, 0.25), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(255, 77, 109, 0.2), transparent 40%);
+  z-index: -1;
+}
