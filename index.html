@@ -1,60 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>For You ❤️</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>Just Something Gentle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#ffd6e8,#ffeef6);
+  overflow:hidden;
+}
+
+/* BACKGROUND */
+.bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.bg span{
+  position:absolute;
+  font-size:20px;
+  animation:floatBg 14s linear infinite;
+  opacity:.8;
+}
+@keyframes floatBg{
+  from{transform:translateY(110vh);}
+  to{transform:translateY(-130vh);}
+}
+
+/* PAGE */
+.page{
+  position:absolute;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:14px;
+  z-index:1;
+}
+.page.active{display:flex;}
+
+/* CARD — SMALL, NO COLUMN */
+.card{
+  background:rgba(255,255,255,.97);
+  padding:18px;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  animation:fadeUp .6s ease;
+  max-width:360px;
+}
+
+/* SCROLL ONLY PAGE 2 */
+#page2 .card{
+  max-height:80vh;
+  overflow-y:auto;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(14px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+p{
+  font-size:14.5px;
+  line-height:1.65;
+  color:#333;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:6px;
+}
+
+button{
+  margin:10px 6px 0;
+  padding:8px 22px;
+  border:none;
+  border-radius:20px;
+  background:#ff6fa5;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.no-btn{
+  background:#ddd;
+  color:#333;
+  position:relative;
+}
+
+/* BUTTON CONTAINER (BOTTOM) */
+.choice{
+  text-align:center;
+  margin-top:18px;
+}
+
+/* HEART + GLITTER */
+.blast-heart{
+  position:fixed;
+  left:50%;
+  top:50%;
+  font-size:22px;
+  animation:blast .9s ease-out forwards;
+  pointer-events:none;
+  z-index:5;
+}
+.sparkle{
+  position:fixed;
+  left:50%;
+  top:50%;
+  width:5px;
+  height:5px;
+  background:radial-gradient(circle,#fff,#ffd1e8);
+  border-radius:50%;
+  animation:sparkleBlast .9s ease-out forwards;
+  pointer-events:none;
+  z-index:6;
+}
+
+@keyframes blast{
+  to{
+    transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y)));
+    opacity:0;
+  }
+}
+@keyframes sparkleBlast{
+  to{
+    transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y)));
+    opacity:0;
+  }
+}
+</style>
 </head>
+
 <body>
 
- <div class="container">
+<div class="bg" id="bg"></div>
 
-  <section class="hero">
-    <img src="teddy.png" alt="Teddy bear" class="teddy" />
-    <h1>Hi… I made this for you 💕</h1>
-    <p>Because some feelings deserve more than a text.</p>
-  </section>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
+    <h2>Hiii 👋</h2>
+    <p>
+      This is a very small website.<br><br>
+      Made for one person only.<br>
+      No names. No expectations.<br>
+      Just something honest 💗
+    </p>
+    <div class="choice">
+      <button onclick="goToPage(2)">Continue</button>
+    </div>
+  </div>
+</div>
 
-<div class="center">
-  <p style="margin-top:2rem;">
-    This page is meant for you.<br />
-    Would you like to see what’s in my heart?
-  </p>
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="card">
+    <p>
+      Hiii…<br><br>
 
-  <button onclick="reveal()">Yes 💕</button>
+      I finally gathered the courage to say something.
+      This is me — unfiltered.<br><br>
+
+      I know that as of now I might not be someone you wish for,
+      but I really want to be that person —
+      someone who could bring a smile on your face when you are low,
+      or simply be with you when you are at your lowest.<br><br>
+
+      I’ve been having this special feeling towards you for a long time,
+      and it was time I came to terms with it.<br><br>
+
+      If anything I ask for, it’s just a chance —
+      a chance to know each other well.<br><br>
+
+      I do have feelings for you,
+      but before you shut me down,
+      can we please be friends for a while?<br><br>
+
+      Can we know about each other more?
+      You can take your time to know me
+      and decide whether to accept me or not.<br><br>
+
+      I’m sorry to text you this way.
+      I’m just afraid of seeing you turn away from me.<br><br>
+
+      Even now, I’ll respect your decision.
+      It might hurt if you say no,
+      but please don’t look at me differently if you do 🤍
+    </p>
+
+    <!-- YES / NO AT BOTTOM -->
+    <div class="choice">
+      <button onclick="heartBlast()">Yes 💖</button>
+      <button class="no-btn" onmouseover="runAway(this)">No 🙈</button>
+    </div>
+  </div>
 </div>
-   
-   <div id="reveal-content" class="hidden">
-  <section class="card">
-    <h2>Why you matter to me 🧸</h2>
-    <ul>
-      <li>You make ordinary days feel special</li>
-      <li>Your smile stays with me longer than you know</li>
-      <li>Being around you feels warm and safe</li>
-    </ul>
-  </section>
-   <section class="card confession">
-  <h2>There’s something I need you to know ❤️</h2>
-  <p>
-    I didn’t plan for this feeling.<br />
-    It grew quietly, gently, and honestly.
-  </p>
-  <p>
-    Somewhere between our conversations and moments,<br />
-    you became someone very special to me.
-  </p>
-  <p style="text-align:center; font-weight:600; color:#ff4d6d;">
-    I wanted you to hear it from me — when I’m ready.
-  </p>
-</section>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <div class="card">
+    <p>
+      Thank you for reading this 🤍<br><br>
+      No pressure. No rush.<br><br>
+      I just wanted to be honest —
+      and I’ll respect your choice, always 🌸
+    </p>
+  </div>
 </div>
-</div>
+
 <script>
-function reveal() {
-  const content = document.getElementById("reveal-content");
-  content.style.display = "block";
-  content.style.animation = "fadeUp 1.8s ease";
+function goToPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
 }
+
+function runAway(btn){
+  btn.style.transform=`translate(${Math.random()*140-70}px,${Math.random()*140-70}px)`;
+}
+
+function heartBlast(){
+  for(let i=0;i<18;i++){
+    const h=document.createElement("div");
+    h.className="blast-heart";
+    h.innerHTML="💗";
+    h.style.setProperty("--x",`${Math.random()*300-150}px`);
+    h.style.setProperty("--y",`${Math.random()*300-150}px`);
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),900);
+  }
+  for(let i=0;i<28;i++){
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.style.setProperty("--x",`${Math.random()*300-150}px`);
+    s.style.setProperty("--y",`${Math.random()*300-150}px`);
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),900);
+  }
+  setTimeout(()=>goToPage(3),800);
+}
+
+/* BACKGROUND EMOJIS */
+const bg=document.getElementById("bg");
+const emojis=["🧸","🍟","💗","✨"];
+setInterval(()=>{
+  const e=document.createElement("span");
+  e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.fontSize=(Math.random()*14+16)+"px";
+  e.style.animationDuration=(Math.random()*6+10)+"s";
+  bg.appendChild(e);
+  setTimeout(()=>e.remove(),14000);
+},700);
 </script>
+
 </body>
 </html>
